@@ -47,13 +47,13 @@ Route::group(["middleware" => "auth"], function (){
     Route::get('/provider/delete/{id}', 'ProviderController@destroyProvider');
 
     //stock
-    Route::get('/stock', 'StockController@allStock');
-    Route::get('/stock/add', 'StockController@createStock');
-    Route::post('/stock/add', 'StockController@storeStock');
-    Route::get('/stock/edit/{id}', 'StockController@editStock');
-    Route::patch('/stock/update/{id}', 'StockController@updateStock');
-    Route::get('/stock/delete/{id}', 'StockController@destroyStock');
-    Route::get('/stock/notification/{id}', 'StockController@stockNotifications');
+    Route::get('/stock', 'StockController@index')->name('stocks.index');
+    Route::get('/stock/add', 'StockController@create')->name('stocks.create');
+    Route::post('/stock/add', 'StockController@store')->name('stocks.store');
+    Route::get('/stock/edit/{id}', 'StockController@edit')->name('stocks.edit');
+    Route::patch('/stock/update/{id}', 'StockController@update')->name('stocks.update');
+    Route::delete('/stock/delete/{id}', 'StockController@destroy')->name('stocks.destroy');
+    Route::get('/stock/notification/{id}', 'StockController@notifications')->name('stocks.notifications');
 
     //orders
     Route::get('/orders', 'OrderController@allOrders');

@@ -43,7 +43,7 @@
                                     <h3 class="text-center">Add a new Item</h3>
                                 </div>
                                 <hr>
-                                {!! Form::open(['url' => url('/stock/add'), 'method' => 'post']) !!}
+                                {!! Form::open(['url' => route('stocks.store'), 'method' => 'post']) !!}
                                 {!! Form::hidden('status', 1) !!}
                                 @include('admin.stock.form')
                                 {!! Form::close() !!}

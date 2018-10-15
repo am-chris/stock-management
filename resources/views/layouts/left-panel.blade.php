@@ -46,8 +46,8 @@
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-truck"></i>Stock</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-table"></i><a href="{{ url('stock') }}">Stock</a></li>
-                        <li><i class="fa fa-plus-square"></i><a href="{{ url('stock/add') }}">Add to the stock</a></li>
+                        <li><i class="fa fa-table"></i><a href="{{ route('stocks.index') }}">Stock</a></li>
+                        <li><i class="fa fa-plus-square"></i><a href="{{ route('stocks.create') }}">Add to the stock</a></li>
                     </ul>
                 </li>
 

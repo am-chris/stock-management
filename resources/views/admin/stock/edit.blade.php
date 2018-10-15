@@ -45,7 +45,7 @@
                                     <h3 class="text-center">Edit a new Item</h3>
                                 </div>
                                 <hr>
-                                {!! Form::model($stock, ['url' => url('/stock/update/'.$stock->id), 'method' => 'patch']) !!}
+                                {!! Form::model($stock, ['url' => route('stocks.update', $stock->id), 'method' => 'patch']) !!}
                                 @include('admin.stock.form')
                                 {!! Form::close() !!}
 

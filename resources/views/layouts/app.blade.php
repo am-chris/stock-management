@@ -58,7 +58,7 @@
                           @if(count(notifications()) > 0)
                         <p class="red">you have {{ count(notifications()) }} notifications</p>
                           @foreach(notifications() as $notification)
-                        <a class="dropdown-item media" href="{{ url('stock/notification/'.$notification->id) }}">
+                        <a class="dropdown-item media" href="{{ route('stocks.notifications', $notification->id) }}">
                             <i class="fa fa-check"></i>
                             <strong>there is only {{ $notification->quantity }} of {{ $notification->goods_name }} in the stock</strong>
                         </a>

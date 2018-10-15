@@ -60,8 +60,10 @@
                                             <td>{{ stockStatus()[$goods->status] }}</td>
                                             <td>{{ $goods->updated_at }}</td>
                                             <td>
-                                                <a href="{{ url('/stock/edit/'.$goods->id) }}"><button class="btn btn-primary btn-sm">Edit</button></a>
-                                                <a href="{{ url('/stock/delete/'.$goods->id) }}"><button class="btn btn-danger btn-sm">Delete</button></a>
+                                                <a href="{{ route('stocks.edit', $goods->id) }}"><button class="btn btn-primary btn-sm">Edit</button></a>
+                                                {!! Form::model($goods, ['url' => route('stocks.destroy', $goods->id), 'method' => 'delete', 'style' => 'display: inline-block;']) !!}
+                                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                {!! Form::close() !!}
                                             </td>
                                         </tr>
                                     @endforeach

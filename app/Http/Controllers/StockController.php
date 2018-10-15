@@ -8,20 +8,21 @@ use Illuminate\Support\Facades\Redirect;
 
 class StockController extends Controller
 {
-    //
-    public function allStock(Stock $stock)
+    public function index(Stock $stock)
     {
         $stock = $stock->all();
+
         return view('admin.stock.index', compact('stock'));
     }
 
-    public function createStock(Stock $stock)
+    public function create(Stock $stock)
     {
         $stock = $stock->orderBy('id', 'desc')->take(5)->get();
+
         return view('admin.stock.add', compact('stock'));
     }
 
-    public function storeStock(Stock $stock, Request $request)
+    public function store(Request $request)
     {
         $this->validate($request, [
             'goods_name' => 'required|unique:stock',
@@ -30,6 +31,7 @@ class StockController extends Controller
             'selling_price' => 'required|integer',
             'status' => 'required'
         ]);
+
         $data = [
             'goods_name' => $request->goods_name,
             'quantity' => $request->quantity,
@@ -39,18 +41,19 @@ class StockController extends Controller
             'notifications' => 1,
         ];
 
-        $stock->create($request->all());
+        Stock::create($data);
 
-        return Redirect('/stock')->withSuccess('The stock is successfully updated');
+        return Redirect()->route('stocks.index')->withSuccess('The stock is successfully updated');
     }
 
-    public function editStock($id, Stock $stock)
+    public function edit($id, Stock $stock)
     {
         $stock = $stock->where('id', $id)->get()[0];
+
         return view('admin.stock.edit', compact('stock'));
     }
 
-    public function updateStock($id, Stock $stock, Request $request)
+    public function update($id, Stock $stock, Request $request)
     {
         $this->validate($request, [
             'goods_name' => 'required',
@@ -62,18 +65,21 @@ class StockController extends Controller
 
         $stock->where('id', $id)->update(array_except($request->all(), ['_method', '_token']));
         $stock->where('id', $id)->update(['notifications' => 1]);
-        return Redirect('/stock')->withSuccess('The stock is successfully updated');
+
+        return Redirect()->route('stocks.index')->withSuccess('The stock is successfully updated');
     }
 
-    public function destroyStock($id, Stock $stock)
+    public function destroy($id, Stock $stock)
     {
         $stock->find($id)->delete();
-        return Redirect('/stock')->withSuccess('The stock is successfully updated');
+
+        return Redirect()->route('stocks.index')->withSuccess('The stock is successfully updated');
     }
 
-    public function stockNotifications($id, Stock $stock)
+    public function notifications($id, Stock $stock)
     {
         $stock->find($id)->update(['notifications' => 0]);
-        return Redirect('/stock');
+
+        return Redirect()->route('stocks.index');
     }
 }
